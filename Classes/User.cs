@@ -19,5 +19,29 @@ namespace Classes
         public string Picture { get; set; }
         public string FacebookAccessKey { get; set; }
 
+        public User(string i_Name, string i_Email, string i_Password, List<User> i_FriendsList, EnumLevel i_Level, int i_Experience, int i_Coins, List<DualMatch> i_ActiveMatchList, string i_Picture, string i_FacebookAccessKey)
+        {
+            Name = i_Name;
+            Email = i_Email;
+            Password = i_Password;
+            FriendsList = i_FriendsList;
+            Level = i_Level;
+            Experience = i_Experience;
+            Coins = i_Coins;
+            ActiveMatchList = i_ActiveMatchList;
+            Picture = i_Picture;
+            FacebookAccessKey = i_FacebookAccessKey;
+        }
+
+        public User(string i_Name, string i_Email, string i_Password, List<User> i_FriendsList, string i_Picture, string i_FacebookAccessKey)
+        {
+            Name = i_Name;
+            Email = i_Email;
+            Password = i_Password;
+            FriendsList = i_FriendsList;
+            Picture = i_Picture;
+            FacebookAccessKey = i_FacebookAccessKey;
+        }
+
     }
 }

@@ -9,10 +9,10 @@ namespace Server
 {
     public class Server: Interface
     {
-        private DataStorage Data { get; set; }
+        public DataStorage Data { get; set; }
+        public List<string> OnlineUserIds { get; set; }
 
-
-
+        // Check if User Exist and if so LogIn, Return status to the Client.
         public string Login(string i_Email, string i_Password)
         {
             User user = Data.CheckIfUserExist(i_Email);
@@ -23,6 +23,7 @@ namespace Server
 
             if (user.Password.Equals(i_Password))
             {
+                OnlineUserIds.Add(user.Email);
                 return "200";
             }
 
@@ -31,6 +32,7 @@ namespace Server
 
         }
 
+        // Create new user and return the status of the request to client
         public string CreateUser(User i_NewUser)
         {
             string stringToReturn = Validations.CheckIfUserFiledsAreValid(i_NewUser);
@@ -65,13 +67,15 @@ namespace Server
             return messageToReturn;
         }
 
+        // return the User object to the client.
         public User OpenDualMode(string i_Email)
         {
             // maybe we need to decide which part of the data we will sent here
             return Data.CheckIfUserExist(i_Email);
         }
 
-        public string CreateMatch(string i_Email, string i_OpponentEmail)
+        // Create new Duel match with friend and return the match object to client.
+        public DualMatch CreateMatch(string i_Email, string i_OpponentEmail)
         {
             User hostUser = Data.CheckIfUserExist(i_Email);
             User opponentUser = Data.CheckIfUserExist(i_OpponentEmail);
@@ -79,7 +83,7 @@ namespace Server
             Data.UpdateUserMatches(i_Email, newMatch);
             Data.UpdateUserMatches(i_OpponentEmail, newMatch);
 
-            return newMatch.MatchID;
+            return newMatch;
         }
 
         public List<Category> GetDuelMatchDetails(string i_MatchId)
@@ -95,20 +99,27 @@ namespace Server
             return filteredCategories;
         }
 
-        public string SendVideo(string i_CategoryId, string i_CardId, string i_MatchId, string i_Video)
+        public string SendVideo(string i_CategoryId, string i_CardId, string i_MatchId, string i_UserId, string i_Video)
         {
             DualMatch currentMatch = Data.GetDualMatchById(i_MatchId);
             Card currentCard = Data.GetCardById(i_CardId);
             Category currentCategory = Data.GetCategotyById(i_CategoryId);
             Guess guess = new Guess(currentCard, currentCategory, currentMatch.PlayersList[currentMatch.ResponderIndex]);
-            Data.UpdateMatch
+            return null;
         }
 
         public string SendGuess(Guess i_Guess, string i_MatchId)
         {
-            throw new NotImplementedException();
+            User hostUser = i_Guess.UserWhoGuessed;
+            DualMatch currentMatch = Data.GetDualMatchById(i_MatchId);
+            return null;
         }
 
+
+        
+        
+        
+        // Multiplayer 
         public string CreateRoom(string i_ManagerEmail)
         {
             throw new NotImplementedException();

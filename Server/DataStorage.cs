@@ -28,6 +28,31 @@ namespace Server
             return null;
         }
 
+        public void GetMoviesFromFile()
+        {
+            List<Card> cards = new List<Card>(100);
+
+            int counter = 0;
+            string line;
+
+            // Read the file and display it line by line.  
+            System.IO.StreamReader file =
+                new System.IO.StreamReader(@"C:\Users\micha\source\repos\BackEndMTAProject\movies.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                System.Console.WriteLine(line);
+                counter++;
+                Cards.Add(new Card(line,1));
+            }
+
+            Categories = new List<Category>();
+            Categories.Add(new Category("Movies",cards));
+
+            file.Close();
+            System.Console.WriteLine("There were {0} lines.", counter);
+            // Suspend the screen.  
+            System.Console.ReadLine();
+        }
 
         public User CheckIfUserExist(string i_Email)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UsefullMethods;
 
 namespace Classes
 {
@@ -14,13 +15,23 @@ namespace Classes
 
         private static Random random = new Random();
 
+        public Category(string i_CategoryID, string i_Name, List<Card> i_CardsList)
+        {
+            CategoryID = i_CategoryID;
+            Name = i_Name;
+            CardsList = i_CardsList;
+        }
+
+        public Category(string i_Name, List<Card> i_CardsList)
+        {
+            CategoryID = "category_" + SystemTools.RandomString();
+            Name = i_Name;
+            CardsList = i_CardsList;
+        }
+
         public Category GetFilteredCategory(List<Card> i_CardHistory)
         {
-            Category newCategory = new Category();
-            newCategory.CategoryID = this.CategoryID;
-            newCategory.Name = this.Name;
-            newCategory.CardsList = GetFilterCards(i_CardHistory);
-
+            Category newCategory = new Category(CategoryID, Name, GetFilterCards(i_CardHistory));
             return newCategory;
         }
 

@@ -10,13 +10,24 @@ namespace Classes
    public class Guess
     {
 
-        private string GuessID { get; set; }
-        private Card Card { get; set; }
-        private Category Category { get; set; }
-        private int TimeInSeconds { get; set; }
-        private int Attempts { get; set; }
-        private int NumberOfHelps { get; set; }
-        private User UserWhoGuessed { get; set; }
+        public string GuessID { get; set; }
+        public Card Card { get; set; }
+        public Category Category { get; set; }
+        public int TimeInSeconds { get; set; }
+        public int Attempts { get; set; }
+        public int NumberOfHelps { get; set; }
+        public User UserWhoGuessed { get; set; }
+
+        public Guess(string i_GuessId, Card i_Card, Category i_Category, int i_TimeInSeconds, int i_Attempts, int i_NumberOfHelps, User i_UserWhoGuessed)
+        {
+            GuessID = i_GuessId;
+            Card = i_Card;
+            Category = i_Category;
+            TimeInSeconds = i_TimeInSeconds;
+            Attempts = i_Attempts;
+            NumberOfHelps = i_NumberOfHelps;
+            UserWhoGuessed = i_UserWhoGuessed;
+        }
 
        public Guess(Card i_Card, Category i_Category, User i_User)
        {

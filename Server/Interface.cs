@@ -15,9 +15,9 @@ namespace Server
 
 
         User OpenDualMode(string i_Email);
-        string CreateMatch(string i_Email, string i_OpponentEmail);
+        DualMatch CreateMatch(string i_Email, string i_OpponentEmail);
         List<Category> GetDuelMatchDetails(string i_MatchId);
-        string SendVideo(string i_CategoryId, string i_CardId, string i_MatchId, string i_Video);
+        string SendVideo(string i_CategoryId, string i_CardId, string i_MatchId, string i_UserId, string i_Video);
         string SendGuess(Guess i_Guess, string i_MatchId);
 
 

@@ -19,6 +19,17 @@ namespace Classes
         public List<Card> CardHistoryList { get; set; } //need to change accessesability level
         public int NumberOfRounds { get; set; }
 
+        public DualMatch(string i_MatchId, string i_CurrentVideo, List<User> i_PlayersList, int i_PresenterIndex, int i_ResponderIndex, Guess i_Guess, List<Card> i_CardHistoryList, int i_NumberOfRounds)
+        {
+            MatchID = i_MatchId;
+            CurrentVideo = i_CurrentVideo;
+            PlayersList = i_PlayersList;
+            PresenterIndex = i_PresenterIndex;
+            ResponderIndex = i_ResponderIndex;
+            Guess = i_Guess;
+            CardHistoryList = i_CardHistoryList;
+            NumberOfRounds = i_NumberOfRounds;
+        }
         public DualMatch()
         {
             
