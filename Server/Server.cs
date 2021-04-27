@@ -101,25 +101,29 @@ namespace Server
 
         public string SendVideo(string i_CategoryId, string i_CardId, string i_MatchId, string i_UserId, string i_Video)
         {
-            DualMatch currentMatch = Data.GetDualMatchById(i_MatchId);
+           //get objects from the ID
+
             Card currentCard = Data.GetCardById(i_CardId);
             Category currentCategory = Data.GetCategotyById(i_CategoryId);
-            Guess guess = new Guess(currentCard, currentCategory, currentMatch.PlayersList[currentMatch.ResponderIndex]);
-            return null;
+
+            Guess guess =
+                new Guess(currentCard, currentCategory,Data.CheckIfUserExist(i_UserId));
+            //send to data base to update
+            //should return if the update successed
+
+            return Data.UpdateMatchSender(i_MatchId, currentCard, guess, i_Video);
+
         }
 
         public string SendGuess(Guess i_Guess, string i_MatchId)
         {
-            User hostUser = i_Guess.UserWhoGuessed;
-            DualMatch currentMatch = Data.GetDualMatchById(i_MatchId);
-            return null;
+
+            // save guess in database
+           return Data.UpdateMatchResponder(i_MatchId);
         }
 
 
-        
-        
-        
-        // Multiplayer 
+
         public string CreateRoom(string i_ManagerEmail)
         {
             throw new NotImplementedException();
