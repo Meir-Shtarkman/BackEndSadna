@@ -12,12 +12,12 @@ namespace Classes
         public string Email { get; set; } //need to change the accessability level
         public string Password { get; set; } //need to change the accessability level
         public List<User> FriendsList { get; set; } //need to change the accessability level
-        private EnumLevel Level { get; set; } 
-        private int Experience { get; set; }
-        private int Coins { get; set; }
-        private List<DualMatch> ActiveMatchList { get; set; }
-        private string Picture { get; set; }
-        private string FacebookAccessKey { get; set; }
+        public EnumLevel Level { get; set; }
+        public int Experience { get; set; }
+        public int Coins { get; set; }
+        public List<DualMatch> ActiveMatchList { get; set; }
+        public string Picture { get; set; }
+        public string FacebookAccessKey { get; set; }
 
     }
 }

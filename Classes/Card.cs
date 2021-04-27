@@ -13,12 +13,6 @@ namespace Classes
         private string Name { get; set; }
         private int DificultLevel { get; set; }
 
-        public Card(string CardID, string Name, int DificultLevel)
-        {
-            this.CardID = CardID;
-            this.Name = Name;
-            this.DificultLevel = DificultLevel;
-        }
     }
     
 

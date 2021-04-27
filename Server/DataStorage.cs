@@ -9,9 +9,25 @@ namespace Server
 {
     public class DataStorage
     {
-        private List<User> Users { get; set; }
-        private List<Room> Rooms { get; set; }
-        private List<Category> Categories { get; set; }
+        public List<User> Users { get; set; }
+        public List<Room> Rooms { get; set; }
+        public List<Category> Categories { get; set; }
+        public List<Card> Cards { get; set; }
+        public List<DualMatch> DualMatches { get; set; }
+
+        public DualMatch GetDualMatchById(string i_Id)
+        {
+            foreach (DualMatch dualMatch in DualMatches)
+            {
+                if (dualMatch.MatchID.Equals(i_Id))
+                {
+                    return dualMatch;
+                }
+            }
+
+            return null;
+        }
+
 
         public User CheckIfUserExist(string i_Email)
         {
@@ -64,12 +80,39 @@ namespace Server
             }
             return "error";
         }
-       
+        
 
-        public Category GetCategory()
+        public void UpdateUserMatches(string i_Email, DualMatch i_NewMatch)
         {
+            User user = CheckIfUserExist(i_Email);
+            user.ActiveMatchList.Add(i_NewMatch);
+        }
 
-        } 
+        public Card GetCardById(string i_CardId)
+        {
+            foreach (Card card in Cards)
+            {
+                if (card.CardID.Equals(i_CardId))
+                {
+                    return card;
+                }
+            }
+
+            return null;
+        }
+
+        public Category GetCategotyById(string i_CategoryId)
+        {
+            foreach (Category category in Categories)
+            {
+                if (category.CategoryID.Equals(i_CategoryId))
+                {
+                    return category;
+                }
+            }
+
+            return null;
+        }
     }
    
 }

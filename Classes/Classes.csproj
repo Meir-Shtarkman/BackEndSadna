@@ -77,5 +77,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Usefull Methods\UsefullMethods.csproj">
+      <Project>{ff3f869a-13dc-467e-a958-5934be5dc147}</Project>
+      <Name>UsefullMethods</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

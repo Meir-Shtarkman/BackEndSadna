@@ -61,26 +61,47 @@ namespace Server
                     return "200";
                 }
             }
+
             return messageToReturn;
         }
+
         public User OpenDualMode(string i_Email)
         {
-            throw new NotImplementedException();
+            // maybe we need to decide which part of the data we will sent here
+            return Data.CheckIfUserExist(i_Email);
         }
 
         public string CreateMatch(string i_Email, string i_OpponentEmail)
         {
-            throw new NotImplementedException();
+            User hostUser = Data.CheckIfUserExist(i_Email);
+            User opponentUser = Data.CheckIfUserExist(i_OpponentEmail);
+            DualMatch newMatch = new DualMatch(hostUser, opponentUser);
+            Data.UpdateUserMatches(i_Email, newMatch);
+            Data.UpdateUserMatches(i_OpponentEmail, newMatch);
+
+            return newMatch.MatchID;
         }
 
         public List<Category> GetDuelMatchDetails(string i_MatchId)
         {
-            throw new NotImplementedException();
+            DualMatch currentMatch = Data.GetDualMatchById(i_MatchId);
+            
+            List<Category> filteredCategories = new List<Category>();
+            foreach (Category category in Data.Categories)
+            {
+                filteredCategories.Add(category.GetFilteredCategory(currentMatch.CardHistoryList));
+            }
+
+            return filteredCategories;
         }
 
-        public string SendVideo(string i_Category, string i_Card, string i_MatchId)
+        public string SendVideo(string i_CategoryId, string i_CardId, string i_MatchId, string i_Video)
         {
-            throw new NotImplementedException();
+            DualMatch currentMatch = Data.GetDualMatchById(i_MatchId);
+            Card currentCard = Data.GetCardById(i_CardId);
+            Category currentCategory = Data.GetCategotyById(i_CategoryId);
+            Guess guess = new Guess(currentCard, currentCategory, currentMatch.PlayersList[currentMatch.ResponderIndex]);
+            Data.UpdateMatch
         }
 
         public string SendGuess(Guess i_Guess, string i_MatchId)
