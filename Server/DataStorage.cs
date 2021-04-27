@@ -113,6 +113,50 @@ namespace Server
 
             return null;
         }
+
+        public string UpdateMatchSender(string currentMatchID, Card currentCard, Guess guess, string video)
+        {
+            DualMatch currentMatch = GetDualMatchById(currentMatchID);
+            currentMatch.CardHistoryList.Add(currentCard);
+            currentMatch.Guess = guess;
+            currentMatch.CurrentVideo = video;
+            //switch presenter and responder indexes
+            SwitchUsersIndex(currentMatch);
+            currentMatch.NumberOfRounds++;
+            //update dual match in the data base
+            for(int i=0;i<DualMatches.Count;i++)
+            {
+                if (DualMatches[i].MatchID.Equals(currentMatch.MatchID))
+                {
+                    DualMatches[i] = currentMatch;
+                    // return "the match is updated";
+                    return "seccess";
+                }
+            }
+            return "failed";
+               //return failed
+        }
+
+        public string UpdateMatchResponder(string i_MatchId)
+        {
+            DualMatch currentMatch = GetDualMatchById(i_MatchId);
+            SwitchUsersIndex(currentMatch);
+            return "success";
+        }
+
+        public void SwitchUsersIndex(DualMatch currentMatch)
+        {
+            if (currentMatch.PresenterIndex == 0)
+            {
+                currentMatch.PresenterIndex = 1;
+                currentMatch.ResponderIndex = 0;
+            }
+            else
+            {
+                currentMatch.PresenterIndex = 0;
+                currentMatch.ResponderIndex = 1;
+            }
+        }
     }
    
 }
